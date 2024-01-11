@@ -1,5 +1,6 @@
 import * as RadixDialog from '@radix-ui/react-dialog'
 import * as React from 'react'
+import { useSyncExternalStore } from 'use-sync-external-store/shim'
 import { commandScore } from './command-score'
 
 type Children = { children?: React.ReactNode }
@@ -144,8 +145,8 @@ const useStore = () => React.useContext(StoreContext)
 // @ts-ignore
 const GroupContext = React.createContext<Group>(undefined)
 
-let idCounter = 0;
-const useId = () => 'cmdk'+(idCounter++).toString(32);
+let idCounter = 0
+const useId = () => 'cmdk' + (idCounter++).toString(32)
 
 const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwardedRef) => {
   const ref = React.useRef<HTMLDivElement>(null)
@@ -956,7 +957,7 @@ function mergeRefs<T = any>(refs: Array<React.MutableRefObject<T> | React.Legacy
 function useCmdk<T = any>(selector: (state: State) => T) {
   const store = useStore()
   const cb = () => selector(store.snapshot())
-  return React.useSyncExternalStore(store.subscribe, cb, cb)
+  return useSyncExternalStore(store.subscribe, cb, cb)
 }
 
 function useValue(
