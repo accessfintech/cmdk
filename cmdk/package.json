@@ -1,5 +1,5 @@
 {
-  "name": "@af/cmdk",
+  "name": "cmdk-access",
   "version": "0.2.0",
   "license": "MIT",
   "main": "./dist/index.js",
